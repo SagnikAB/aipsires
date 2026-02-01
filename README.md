@@ -128,7 +128,7 @@ python app.py
 ---
 
 ## 🗂 Project Structure
-AI-Powered-Smart-Interview-Resume-Evaluation-System/
+''' AI-Powered-Smart-Interview-Resume-Evaluation-System/
 │
 ├── data/
 │ ├── resumes/
