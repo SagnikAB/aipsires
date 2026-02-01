@@ -116,6 +116,8 @@ pip install -r requirements.txt
 bash
 python app.py
 
+---
+
 ## ▶Usage
 1. Upload a resume through the application interface
 2. System parses and evaluates resume automatically
@@ -123,35 +125,39 @@ python app.py
 4. NLP models evaluate responses
 5. Final suitability score is generated
 
-🗂 Project Structure
-## AI-Powered-Smart-Interview-Resume-Evaluation-System/
+---
+
+## 🗂 Project Structure
+AI-Powered-Smart-Interview-Resume-Evaluation-System/
 │
 ├── data/
-│   ├── resumes/
-│   └── interview_data/
+│ ├── resumes/
+│ └── interview_data/
 │
 ├── models/
-│   ├── resume_model.pkl
-│   └── interview_model.pkl
+│ ├── resume_model.pkl
+│ └── interview_model.pkl
 │
 ├── preprocessing/
-│   ├── resume_parser.py
-│   └── text_cleaner.py
+│ ├── resume_parser.py
+│ └── text_cleaner.py
 │
 ├── training/
-│   ├── train_resume_model.py
-│   └── train_interview_model.py
+│ ├── train_resume_model.py
+│ └── train_interview_model.py
 │
 ├── templates/
-│   └── index.html
+│ └── index.html
 │
 ├── static/
-│   ├── css/
-│   └── js/
+│ ├── css/
+│ └── js/
 │
 ├── app.py
 ├── requirements.txt
 └── README.md
+
+---
 
 ## 🔬 Research & Development Aspect
 1. Comparative study of multiple ML models
@@ -160,11 +166,15 @@ python app.py
 4. Bias reduction through objective scoring mechanisms
 5. Modular design for extensible AI research
 
+---
+
 ## 📊 Results & Observations
 1. Improved consistency in resume screening
 2. Accurate relevance scoring for candidate profiles
 3. Reduced manual screening effort
 4. Effective interview response evaluation using NLP similarity metrics
+
+---
 
 ## 📜 License
 
