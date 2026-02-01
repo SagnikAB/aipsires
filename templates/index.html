@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Recruiter</title>
+</head>
+<body>
+  <h2>Upload Resume</h2>
+  <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="resume" required>
+    <button type="submit">Upload</button>
+  </form>
+
+  {% if result %}
+    <h3>Skills: {{ result.skills }}</h3>
+    <h3>Score: {{ result.score }}%</h3>
+    <h3>Interview Question: {{ result.question }}</h3>
+  {% endif %}
+</body>
+</html>
