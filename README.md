@@ -5,27 +5,6 @@ The system aims to provide **objective, scalable, and data-driven candidate asse
 
 ---
 
-## 📌 Table of Contents
-- [Overview](#overview)
-- [Problem Statement](#problem-statement)
-- [Objectives](#objectives)
-- [System Workflow](#system-workflow)
-- [Key Features](#key-features)
-- [Machine Learning & NLP Approach](#machine-learning--nlp-approach)
-- [Tech Stack](#tech-stack)
-- [Dataset](#dataset)
-- [Installation & Setup](#installation--setup)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Results & Observations](#results--observations)
-- [Limitations](#limitations)
-- [Future Scope](#future-scope)
-- [Research & Development Aspect](#research--development-aspect)
-- [Author](#author)
-- [License](#license)
-
----
-
 ## 📖 Overview
 Recruitment processes traditionally rely on manual resume screening and subjective interview evaluations, which are time-consuming and prone to inconsistency.  
 This project proposes an **AI-powered system** that evaluates candidates based on:
