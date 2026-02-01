@@ -116,6 +116,14 @@ pip install -r requirements.txt
 bash
 python app.py
 
+## ▶Usage
+1. Upload a resume through the application interface
+2. System parses and evaluates resume automatically
+3. Candidate answers interview questions
+4. NLP models evaluate responses
+5. Final suitability score is generated
+
+🗂 Project Structure
 ## AI-Powered-Smart-Interview-Resume-Evaluation-System/
 │
 ├── data/
