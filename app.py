@@ -1,35 +1,32 @@
-from flask import Flask, request, render_template
-from nlp_engine import extract_skills
-from scoring_engine import score_resume
-from interview_engine import generate_question, evaluate_answer
-from database import init_db, insert_candidate
+from flask import Flask, render_template, request, redirect
+import os
+from core.resume_parser import extract_text
+from core.scoring_engine import score_resume
 
 app = Flask(__name__)
-init_db()
+UPLOAD_FOLDER = "uploads"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-@app.route("/", methods=["GET","POST"])
-def index():
-    result = None
-    if request.method == "POST":
-        resume = request.form["resume_text"]
-        job_desc = request.form["job_desc"]
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
-        skills = extract_skills(resume)
-        r_score = score_resume(resume, job_desc)
-        question = generate_question(skills)
+@app.route("/")
+def home():
+    return render_template("index.html")
 
-        answer = request.form.get("answer","")
-        i_score = evaluate_answer(answer)
+@app.route("/analyze", methods=["POST"])
+def analyze():
+    if "resume" not in request.files:
+        return redirect("/")
 
-        insert_candidate("User", r_score, i_score)
+    file = request.files["resume"]
+    filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
+    file.save(filepath)
 
-        result = {
-            "skills": skills,
-            "resume_score": r_score,
-            "interview_score": i_score,
-            "question": question
-        }
+    text = extract_text(filepath)
+    score, keywords = score_resume(text)
 
-    return render_template("index.html", result=result)
+    return render_template("result.html", score=score, keywords=keywords)
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)

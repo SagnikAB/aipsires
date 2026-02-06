@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AI Resume Analyzer</title>
+<title>Analysis Result</title>
 <link rel="stylesheet" href="/static/style.css">
 </head>
 
@@ -19,14 +19,21 @@
 </nav>
 
 <div class="container">
-  <div class="card">
-    <h1>AI Resume Analyzer</h1>
-    <p class="subtitle">Upload your resume and get instant AI-based skill scoring.</p>
+  <div class="card result">
+    <h1>Resume Score</h1>
 
-    <form action="/analyze" method="post" enctype="multipart/form-data">
-      <input type="file" name="resume" required>
-      <button type="submit">Analyze Resume</button>
-    </form>
+    <div class="score-circle">
+      {{ score }}
+    </div>
+
+    <h3>Matched Skills</h3>
+    <ul class="skills">
+      {% for k in keywords %}
+        <li>{{ k }}</li>
+      {% endfor %}
+    </ul>
+
+    <a class="back-btn" href="/">Analyze Another Resume</a>
   </div>
 </div>
 
