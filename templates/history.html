@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Resume History</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="dark">
+
+<div class="container">
+  <div class="card">
+    <h2>Uploaded Resumes</h2>
+
+    <table border="1" width="100%" cellpadding="8">
+      <tr>
+        <th>File</th>
+        <th>Score</th>
+        <th>Skills</th>
+        <th>Date</th>
+      </tr>
+
+      {% for r in data %}
+      <tr>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        <td>{{ r[4] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">Back</a>
+  </div>
+</div>
+
+</body>
+</html>
