@@ -1,49 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Analysis Result</title>
-<link rel="stylesheet" href="/static/style.css">
+<title>Result</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='theme.js') }}" defer></script>
 </head>
 
-<body class="dark">
+<body>
 
 <nav>
-  <h2>AI Recruiter</h2>
-
-  <div class="links">
-    <a href="https://portfolio-frv3.vercel.app/" target="_blank">Portfolio</a>
-    <a href="https://www.linkedin.com/in/sagnik-dam-b33bb3322" target="_blank">LinkedIn</a>
-    <a href="https://x.com/29Sagnik" target="_blank">X</a>
-    <a href="https://www.instagram.com/s4g.n1k_/" target="_blank">Instagram</a>
-
-    <button onclick="toggleTheme()" class="theme-btn">🌙</button>
-  </div>
+    <h2>Resume Score</h2>
+    <button type="button" class="theme-btn" onclick="toggleTheme()">🌗</button>
 </nav>
 
 <div class="container">
-  <div class="card result">
-    <h1>Resume Score</h1>
+    <div class="card">
+        <h2>{{ score }} / 100</h2>
 
-    <div class="score-circle">
-      {{ score }}
+        <ul class="skills">
+            {% for k in keywords %}
+            <li>{{ k }}</li>
+            {% endfor %}
+        </ul>
+
+        <a href="/" class="back-btn">← Back</a>
     </div>
-
-    <h3>Matched Skills</h3>
-    <ul class="skills">
-      {% for k in keywords %}
-        <li>{{ k }}</li>
-      {% endfor %}
-    </ul>
-
-    <a class="back-btn" href="/">Analyze Another Resume</a>
-  </div>
 </div>
 
-<footer>
-  <p>© 2026 • Built by <strong>Sagnik Dam</strong></p>
-</footer>
-
-<script src="/static/theme.js"></script>
 </body>
 </html>

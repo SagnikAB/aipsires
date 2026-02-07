@@ -1,12 +1,17 @@
 function toggleTheme() {
-    document.body.classList.toggle("light");
-    localStorage.setItem("theme",
-        document.body.classList.contains("light") ? "light" : "dark"
-    );
+    const body = document.body;
+    body.classList.toggle("light");
+
+    if (body.classList.contains("light")) {
+        localStorage.setItem("theme", "light");
+    } else {
+        localStorage.setItem("theme", "dark");
+    }
 }
 
 window.onload = function () {
-    if (localStorage.getItem("theme") === "light") {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
         document.body.classList.add("light");
     }
 };

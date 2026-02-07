@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>AI Resume Analyzer</title>
+<meta charset="UTF-8">
+<title>AI Resume Analyzer</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <!-- Theme JS -->
-    <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='theme.js') }}" defer></script>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <nav>
     <h2>AI Resume Analyzer</h2>
 
     <div class="links">
         <a href="/history">History</a>
-
         <a href="https://portfolio-frv3.vercel.app/" target="_blank">Portfolio</a>
         <a href="https://www.linkedin.com/in/sagnik-dam-b33bb3322" target="_blank">LinkedIn</a>
         <a href="https://www.instagram.com/s4g.n1k_/" target="_blank">Instagram</a>
         <a href="https://x.com/29Sagnik" target="_blank">X</a>
 
-        <button class="theme-btn" onclick="toggleTheme()">🌗</button>
+        <button type="button" class="theme-btn" onclick="toggleTheme()">🌗</button>
     </div>
 </nav>
 
-<!-- MAIN CONTAINER -->
 <div class="container">
     <div class="card">
-        <h1>Upload Your Resume</h1>
-        <p class="subtitle">Get instant AI-based scoring and skill detection</p>
+        <h1>Upload Resume</h1>
+        <p class="subtitle">AI powered scoring & skill detection</p>
 
         <form action="/analyze" method="POST" enctype="multipart/form-data">
             <input type="file" name="resume" required>
             <br><br>
-            <button type="submit">Analyze Resume</button>
+            <button type="submit">Analyze</button>
         </form>
     </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-    <p>© Author – Sagnik Dam</p>
+    © Author – Sagnik Dam
 </footer>
 
 </body>
