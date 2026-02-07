@@ -1,148 +1,40 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Resume Analyzer</title>
 
-/* THEME VARIABLES */
-:root {
-  --bg: #0f172a;
-  --card: #1e293b;
-  --text: #ffffff;
-  --nav: #020617;
-}
+    <!-- IMPORTANT: Correct static linking -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
+</head>
 
-body.light {
-  --bg: #f1f5f9;
-  --card: #ffffff;
-  --text: #0f172a;
-  --nav: #e2e8f0;
-}
+<body>
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+<nav>
+    <h2>AI Resume Analyzer</h2>
+    <div class="links">
+        <a href="/history">History</a>
+        <button class="theme-btn" onclick="toggleTheme()">🌗</button>
+    </div>
+</nav>
 
-/* NAVBAR */
-nav {
-  background: var(--nav);
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #1e293b;
-}
+<div class="container">
+    <div class="card">
+        <h1>Upload Your Resume</h1>
+        <p class="subtitle">Get instant AI-based scoring and skill detection</p>
 
-nav h2 {
-  color: #22c55e;
-}
+        <form action="/analyze" method="POST" enctype="multipart/form-data">
+            <input type="file" name="resume" required>
+            <br><br>
+            <button type="submit">Analyze Resume</button>
+        </form>
+    </div>
+</div>
 
-.links a {
-  color: #94a3b8;
-  margin-left: 18px;
-  text-decoration: none;
-  font-size: 14px;
-}
+<footer>
+    <p>© 2026 Sagnik Dam</p>
+</footer>
 
-.links a:hover {
-  color: #22c55e;
-}
-
-/* THEME BUTTON */
-.theme-btn {
-  margin-left: 15px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
-
-/* MAIN */
-.container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card {
-  background: var(--card);
-  padding: 40px;
-  border-radius: 15px;
-  text-align: center;
-  width: 380px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.subtitle {
-  color: #64748b;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-button {
-  background: #22c55e;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-button:hover {
-  background: #16a34a;
-}
-
-/* RESULT */
-.score-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: #22c55e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  margin: 20px auto;
-  font-weight: bold;
-}
-
-.skills {
-  list-style: none;
-  margin-top: 15px;
-}
-
-.skills li {
-  background: #334155;
-  margin: 6px 0;
-  padding: 8px;
-  border-radius: 6px;
-  color: white;
-}
-
-body.light .skills li {
-  background: #e2e8f0;
-  color: black;
-}
-
-.back-btn {
-  display: inline-block;
-  margin-top: 20px;
-  text-decoration: none;
-  color: #22c55e;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 15px;
-  background: var(--nav);
-  font-size: 13px;
-  color: #64748b;
-}
+</body>
+</html>
