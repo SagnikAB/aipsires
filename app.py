@@ -6,19 +6,20 @@ from core.resume_parser import extract_text
 from core.scoring_engine import score_resume
 from core.database import init_db, save_resume, get_all_resumes
 
-app = Flask(__name__)
+# ----------- FLASK APP CONFIG ----------- #
+app = Flask(__name__, template_folder="templates", static_folder="static")
 
-# Upload folder setup
+# ----------- UPLOAD FOLDER SETUP ----------- #
 UPLOAD_FOLDER = "uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-# Initialize database
+# ----------- DATABASE INIT ----------- #
 init_db()
 
-# ---------------- ROUTES ---------------- #
+# ----------- ROUTES ----------- #
 
 @app.route("/")
 def home():
@@ -35,13 +36,15 @@ def analyze():
     if file.filename == "":
         return redirect("/")
 
-    # Secure filename to avoid issues
+    # Secure filename
     filename = secure_filename(file.filename)
     filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
     file.save(filepath)
 
-    # Extract & score
+    # Extract text
     text = extract_text(filepath)
+
+    # Score resume
     score, keywords = score_resume(text)
 
     # Save to database
@@ -56,10 +59,7 @@ def history():
     return render_template("history.html", data=data)
 
 
-# ---------------- RUN SERVER ---------------- #
-
+# ----------- RUN SERVER ----------- #
 if __name__ == "__main__":
-    import os
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5000))  # Render dynamic port
     app.run(host="0.0.0.0", port=port)
-
