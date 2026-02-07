@@ -1,19 +1,12 @@
 function toggleTheme() {
-  const body = document.body;
-  body.classList.toggle("light");
-  body.classList.toggle("dark");
-
-  if (body.classList.contains("light")) {
-    localStorage.setItem("theme", "light");
-  } else {
-    localStorage.setItem("theme", "dark");
-  }
+    document.body.classList.toggle("light");
+    localStorage.setItem("theme",
+        document.body.classList.contains("light") ? "light" : "dark"
+    );
 }
 
-window.onload = () => {
-  const saved = localStorage.getItem("theme");
-  if (saved === "light") {
-    document.body.classList.remove("dark");
-    document.body.classList.add("light");
-  }
+window.onload = function () {
+    if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light");
+    }
 };

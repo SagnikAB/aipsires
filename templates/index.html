@@ -4,21 +4,32 @@
     <meta charset="UTF-8">
     <title>AI Resume Analyzer</title>
 
-    <!-- IMPORTANT: Correct static linking -->
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Theme JS -->
     <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <nav>
     <h2>AI Resume Analyzer</h2>
+
     <div class="links">
         <a href="/history">History</a>
+
+        <a href="https://portfolio-frv3.vercel.app/" target="_blank">Portfolio</a>
+        <a href="https://www.linkedin.com/in/sagnik-dam-b33bb3322" target="_blank">LinkedIn</a>
+        <a href="https://www.instagram.com/s4g.n1k_/" target="_blank">Instagram</a>
+        <a href="https://x.com/29Sagnik" target="_blank">X</a>
+
         <button class="theme-btn" onclick="toggleTheme()">🌗</button>
     </div>
 </nav>
 
+<!-- MAIN CONTAINER -->
 <div class="container">
     <div class="card">
         <h1>Upload Your Resume</h1>
@@ -32,8 +43,9 @@
     </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
-    <p>© 2026 Sagnik Dam</p>
+    <p>© Author – Sagnik Dam</p>
 </footer>
 
 </body>
