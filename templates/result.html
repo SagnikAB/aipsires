@@ -1,32 +1,81 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Result</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<script src="{{ url_for('static', filename='theme.js') }}" defer></script>
-</head>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis Result | AI Resume Analyzer</title>
 
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
+    <script defer>
+      document.addEventListener("DOMContentLoaded", function () {
+          const circle = document.querySelector(".score-circle");
+          const score = {{ score }};
+          circle.style.background = `conic-gradient(var(--primary) ${score}%, #1e293b 0)`;
+      });
+    </script>
+  </head>
 
-<nav>
-    <h2>Resume Score</h2>
-    <button type="button" class="theme-btn" onclick="toggleTheme()">🌗</button>
-</nav>
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav>
+      <div class="logo">
+        <h2>Resume Analysis Report</h2>
+        <span class="status-badge">AI Generated</span>
+      </div>
 
-<div class="container">
-    <div class="card">
-        <h2>{{ score }} / 100</h2>
+      <div class="links">
+        <a href="/">Home</a>
+        <a href="/history">History</a>
+        <button type="button" class="theme-btn" onclick="toggleTheme()">
+          🌗
+        </button>
+      </div>
+    </nav>
 
-        <ul class="skills">
+    <!-- ================= MAIN ================= -->
+    <div class="container">
+      <div class="card">
+        <h1>Overall Resume Score</h1>
+
+        <!-- Score Circle -->
+        <div class="score-circle">{{ score }}%</div>
+
+        <!-- Score Interpretation -->
+        <div class="score-text">
+          {% if score >= 80 %}
+          <p class="excellent">🔥 Excellent Resume</p>
+          {% elif score >= 60 %}
+          <p class="good">👍 Good but Can Improve</p>
+          {% else %}
+          <p class="improve">⚠ Needs Improvement</p>
+          {% endif %}
+        </div>
+
+        <!-- Keywords Section -->
+        <div class="keywords-section">
+          <h3>Detected Skills & Keywords</h3>
+
+          {% if keywords %}
+          <div class="skills-grid">
             {% for k in keywords %}
-            <li>{{ k }}</li>
+            <span class="skill-badge">{{ k }}</span>
             {% endfor %}
-        </ul>
+          </div>
+          {% else %}
+          <p class="empty-state">No relevant keywords detected.</p>
+          {% endif %}
+        </div>
 
-        <a href="/" class="back-btn">← Back</a>
+        <a href="/" class="back-btn">← Analyze Another Resume</a>
+      </div>
     </div>
-</div>
 
-</body>
+    <footer>
+      <p>© 2026 Sagnik Dam | AI Resume Analyzer</p>
+    </footer>
+  </body>
 </html>

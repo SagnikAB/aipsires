@@ -1,6 +1,8 @@
 __pycache__/
 *.pyc
-resumes.db
-uploads/
 .env
+uploads/
+instance/
+*.db
 venv/
+.env/

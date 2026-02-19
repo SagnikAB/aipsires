@@ -1,45 +1,173 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>AI Resume Analyzer</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<script src="{{ url_for('static', filename='theme.js') }}" defer></script>
-</head>
+    <!-- SEO -->
+    <title>AI Resume Analyzer | Smart Hiring Assistant</title>
+    <meta
+      name="description"
+      content="AI-powered resume analysis with instant scoring, keyword detection, and recruiter insights."
+    />
+    <meta name="author" content="Sagnik Dam" />
 
-<body>
+    <!-- Social Preview (Important for LinkedIn sharing) -->
+    <meta property="og:title" content="AI Resume Analyzer" />
+    <meta
+      property="og:description"
+      content="Analyze your resume with AI and get instant recruiter insights."
+    />
+    <meta property="og:type" content="website" />
 
-<nav>
-    <h2>AI Resume Analyzer</h2>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
+  </head>
 
-    <div class="links">
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav>
+      <div class="logo">
+        <h2>AI Resume Analyzer</h2>
+        <span class="status-badge">AI Powered</span>
+      </div>
+
+      <div class="links">
         <a href="/history">History</a>
-        <a href="https://portfolio-frv3.vercel.app/" target="_blank">Portfolio</a>
-        <a href="https://www.linkedin.com/in/sagnik-dam-b33bb3322" target="_blank">LinkedIn</a>
-        <a href="https://www.instagram.com/s4g.n1k_/" target="_blank">Instagram</a>
-        <a href="https://x.com/29Sagnik" target="_blank">X</a>
+        <a
+          href="https://portfolio-frv3.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Portfolio</a
+        >
+        <a
+          href="https://www.linkedin.com/in/sagnik-dam-b33bb3322"
+          target="_blank"
+          rel="noopener noreferrer"
+          >LinkedIn</a
+        >
+        <a
+          href="https://www.instagram.com/s4g.n1k_/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Instagram</a
+        >
+        <a
+          href="https://x.com/29Sagnik"
+          target="_blank"
+          rel="noopener noreferrer"
+          >X</a
+        >
 
-        <button type="button" class="theme-btn" onclick="toggleTheme()">🌗</button>
-    </div>
-</nav>
+        <button
+          type="button"
+          class="theme-btn"
+          onclick="toggleTheme()"
+          aria-label="Toggle Theme"
+        >
+          🌗
+        </button>
+      </div>
+    </nav>
 
-<div class="container">
-    <div class="card">
-        <h1>Upload Resume</h1>
-        <p class="subtitle">AI powered scoring & skill detection</p>
+    <!-- ================= HERO SECTION ================= -->
+    <main class="container">
+      <div class="card">
+        <h1>Analyze Your Resume with AI</h1>
+        <p class="subtitle">
+          Get instant scoring, keyword detection, and recruiter insights in
+          seconds.
+        </p>
 
-        <form action="/analyze" method="POST" enctype="multipart/form-data">
-            <input type="file" name="resume" required>
-            <br><br>
-            <button type="submit">Analyze</button>
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+          <p class="flash">{{ message }}</p>
+          {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
+
+        <!-- Upload Form -->
+        <form
+          action="/analyze"
+          method="POST"
+          enctype="multipart/form-data"
+          onsubmit="showLoader()"
+        >
+          <div class="drop-zone" id="dropZone">
+            <p>
+              📄 Drag & Drop Resume Here <br />
+              <span class="small-text">
+                or click to browse (PDF recommended, max 5MB)
+              </span>
+            </p>
+
+            <input
+              type="file"
+              id="resumeInput"
+              name="resume"
+              accept=".pdf,.doc,.docx"
+              hidden
+              required
+            />
+          </div>
+
+          <button type="submit">🚀 Analyze Resume</button>
         </form>
+
+        <!-- Feature Highlights -->
+        <div class="features">
+          <div class="feature">⚡ Instant AI Scoring</div>
+          <div class="feature">🎯 Skill Matching</div>
+          <div class="feature">📊 Detailed Breakdown</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ================= LOADING OVERLAY ================= -->
+    <div class="loading-overlay" id="loader">
+      <div class="spinner"></div>
+      <p class="loading-text">Analyzing Resume with AI...</p>
     </div>
-</div>
 
-<footer>
-    © Author – Sagnik Dam
-</footer>
+    <!-- ================= FOOTER ================= -->
+    <footer>
+      <p>© 2026 Sagnik Dam | Built with Flask & AI</p>
+    </footer>
 
-</body>
+    <!-- ================= DRAG & DROP SCRIPT ================= -->
+    <script>
+      const dropZone = document.getElementById("dropZone");
+      const fileInput = document.getElementById("resumeInput");
+
+      dropZone.addEventListener("click", () => fileInput.click());
+
+      dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZone.classList.add("dragover");
+      });
+
+      dropZone.addEventListener("dragleave", () => {
+        dropZone.classList.remove("dragover");
+      });
+
+      dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropZone.classList.remove("dragover");
+
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          fileInput.files = files;
+        }
+      });
+
+      function showLoader() {
+        document.getElementById("loader").style.display = "flex";
+      }
+    </script>
+  </body>
 </html>

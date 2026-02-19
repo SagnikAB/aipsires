@@ -1,29 +1,63 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>History</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<script src="{{ url_for('static', filename='theme.js') }}" defer></script>
-</head>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis History | AI Resume Analyzer</title>
 
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
+  </head>
 
-<nav>
-    <h2>History</h2>
-    <button type="button" class="theme-btn" onclick="toggleTheme()">🌗</button>
-</nav>
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav>
+      <div class="logo">
+        <h2>Analysis History</h2>
+        <span class="status-badge">Dashboard</span>
+      </div>
 
-<div class="container">
-    <div class="card">
+      <div class="links">
+        <a href="/">Home</a>
+        <button type="button" class="theme-btn" onclick="toggleTheme()">
+          🌗
+        </button>
+      </div>
+    </nav>
 
-        {% for row in data %}
-        <p>{{ row[1] }} - {{ row[2] }}</p>
-        {% endfor %}
+    <!-- ================= MAIN ================= -->
+    <div class="container">
+      <div class="card">
+        <h1>Previous Resume Analyses</h1>
+        <p class="subtitle">Track scores and resume performance over time</p>
 
-        <a href="/" class="back-btn">← Back</a>
+        {% if data %}
+        <div class="history-list">
+          {% for row in data %}
+          <div class="history-item">
+            <div class="file-info">
+              <span class="file-name">📄 {{ row[1] }}</span>
+              <span class="score-badge">{{ row[2] }}%</span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+          <p>No resumes analyzed yet.</p>
+          <span>Upload your first resume to see history here.</span>
+        </div>
+        {% endif %}
+
+        <a href="/" class="back-btn">← Back to Dashboard</a>
+      </div>
     </div>
-</div>
 
-</body>
+    <footer>
+      <p>© 2026 Sagnik Dam | AI Resume Analyzer</p>
+    </footer>
+  </body>
 </html>
