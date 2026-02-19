@@ -1,6 +1,7 @@
-// ================================
-// THEME INITIALIZATION
-// ================================
+// ============================================
+// THEME INITIALIZATION (Runs Immediately)
+// ============================================
+
 (function () {
   const savedTheme = localStorage.getItem("theme");
 
@@ -17,9 +18,10 @@
   updateThemeIcon();
 })();
 
-// ================================
+// ============================================
 // TOGGLE FUNCTION
-// ================================
+// ============================================
+
 function toggleTheme() {
   const body = document.body;
   const isLight = body.classList.toggle("light");
@@ -29,9 +31,10 @@ function toggleTheme() {
   updateThemeIcon();
 }
 
-// ================================
+// ============================================
 // UPDATE BUTTON ICON
-// ================================
+// ============================================
+
 function updateThemeIcon() {
   const btn = document.querySelector(".theme-btn");
 
@@ -45,3 +48,12 @@ function updateThemeIcon() {
     btn.title = "Switch to Light Mode";
   }
 }
+
+// ============================================
+// SMOOTH TRANSITION FIX
+// ============================================
+
+// Prevent abrupt theme change on load
+window.addEventListener("load", () => {
+  document.body.style.transition = "background 0.3s ease, color 0.3s ease";
+});

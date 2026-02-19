@@ -2,15 +2,20 @@
 
 :root {
   --primary: #22c55e;
+
   --bg: #0f172a;
-  --card: rgba(30, 41, 59, 0.85);
+  --card: rgba(30, 41, 59, 0.9);
   --text: #ffffff;
+  --nav-bg: #0b1220;
+  --footer-text: rgba(255, 255, 255, 0.6);
 }
 
 body.light {
   --bg: #f1f5f9;
   --card: #ffffff;
   --text: #0f172a;
+  --nav-bg: #ffffff;
+  --footer-text: rgba(15, 23, 42, 0.6);
 }
 
 * {
@@ -26,10 +31,18 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
-/* Background Glow */
-body::before {
+/* Remove glow in light mode */
+body.light::before {
+  display: none;
+}
+
+/* Dark Mode Glow */
+body:not(.light)::before {
   content: "";
   position: fixed;
   width: 600px;
@@ -43,16 +56,16 @@ body::before {
 
 /* NAVBAR */
 nav {
+  background: var(--nav-bg);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 80px;
+  transition: background 0.3s ease;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.logo h2 {
+  color: var(--text);
 }
 
 .badge {
@@ -60,12 +73,14 @@ nav {
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 12px;
+  color: white;
 }
 
 .links a {
   margin-left: 20px;
   text-decoration: none;
   color: var(--primary);
+  font-weight: 500;
 }
 
 .theme-btn {
@@ -75,6 +90,7 @@ nav {
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
+  color: white;
 }
 
 /* HERO */
@@ -93,7 +109,8 @@ nav {
   max-width: 650px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
 }
 
 h1 {
@@ -188,7 +205,8 @@ button[type="submit"]:hover {
 footer {
   text-align: center;
   padding: 20px;
-  opacity: 0.7;
+  color: var(--footer-text);
+  transition: color 0.3s ease;
 }
 
 /* RESPONSIVE */
