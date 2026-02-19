@@ -10,13 +10,6 @@
       href="{{ url_for('static', filename='style.css') }}"
     />
     <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
-    <script defer>
-      document.addEventListener("DOMContentLoaded", function () {
-          const circle = document.querySelector(".score-circle");
-          const score = {{ score }};
-          circle.style.background = `conic-gradient(var(--primary) ${score}%, #1e293b 0)`;
-      });
-    </script>
   </head>
 
   <body>
@@ -24,50 +17,73 @@
     <nav>
       <div class="logo">
         <h2>Resume Analysis Report</h2>
-        <span class="status-badge">AI Generated</span>
+        <span class="badge">AI Generated</span>
       </div>
 
       <div class="links">
         <a href="/">Home</a>
         <a href="/history">History</a>
-        <button type="button" class="theme-btn" onclick="toggleTheme()">
-          🌗
-        </button>
+        <button
+          type="button"
+          class="theme-btn"
+          onclick="toggleTheme()"
+        ></button>
       </div>
     </nav>
 
     <!-- ================= MAIN ================= -->
-    <div class="card result-card">
-      <h1 class="result-title">Overall Resume Score</h1>
+    <main class="container">
+      <div class="card result-card">
+        <h1 class="result-title">Overall Resume Score</h1>
 
-      <!-- SCORE BLOCK -->
-      <div class="score-wrapper">
-        <div class="score-number">{{ score }}%</div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: {{ score }}%;"></div>
+        <!-- SCORE BLOCK -->
+        <div class="score-wrapper">
+          <div class="score-number" id="scoreNumber">{{ score }}%</div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
         </div>
-      </div>
 
-      <p class="score-message">
-        {% if score >= 80 %} 🔥 Excellent Resume {% elif score >= 60 %} 👍 Good
-        but Can Improve {% else %} ⚠ Needs Improvement {% endif %}
-      </p>
+        <p class="score-message">
+          {% if score >= 80 %} 🔥 Excellent Resume {% elif score >= 60 %} 👍
+          Good but Can Improve {% else %} ⚠ Needs Improvement {% endif %}
+        </p>
 
-      <!-- KEYWORDS -->
-      <div class="keywords-section">
-        <h3>Detected Skills & Keywords</h3>
-        <div class="keywords-grid">
-          {% for k in keywords %}
-          <span class="keyword-badge">{{ k }}</span>
-          {% endfor %}
+        <!-- KEYWORDS -->
+        <div class="keywords-section">
+          <h3>Detected Skills & Keywords</h3>
+
+          {% if keywords %}
+          <div class="keywords-grid">
+            {% for k in keywords %}
+            <span class="keyword-badge">{{ k }}</span>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p style="opacity: 0.7; margin-top: 10px">
+            No significant keywords detected.
+          </p>
+          {% endif %}
         </div>
+
+        <a href="/" class="primary-btn">Analyze Another Resume</a>
       </div>
+    </main>
 
-      <a href="/" class="primary-btn">Analyze Another Resume</a>
-    </div>
+    <footer>© 2026 Sagnik Dam | AI Resume Analyzer</footer>
 
-    <footer>
-      <p>© 2026 Sagnik Dam | AI Resume Analyzer</p>
-    </footer>
+    <!-- ================= SCORE ANIMATION ================= -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const score = {{ score|int }};
+        const progress = document.getElementById("progressFill");
+
+        // Animate progress bar
+        setTimeout(() => {
+          progress.style.width = score + "%";
+        }, 200);
+      });
+    </script>
   </body>
 </html>
