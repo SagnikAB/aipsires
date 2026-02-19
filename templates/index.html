@@ -3,22 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- SEO -->
     <title>AI Resume Analyzer | Smart Hiring Assistant</title>
-    <meta
-      name="description"
-      content="AI-powered resume analysis with instant scoring, keyword detection, and recruiter insights."
-    />
-    <meta name="author" content="Sagnik Dam" />
-
-    <!-- Social Preview (Important for LinkedIn sharing) -->
-    <meta property="og:title" content="AI Resume Analyzer" />
-    <meta
-      property="og:description"
-      content="Analyze your resume with AI and get instant recruiter insights."
-    />
-    <meta property="og:type" content="website" />
 
     <link
       rel="stylesheet"
@@ -32,48 +17,31 @@
     <nav>
       <div class="logo">
         <h2>AI Resume Analyzer</h2>
-        <span class="status-badge">AI Powered</span>
+        <span class="badge">AI Powered</span>
       </div>
 
       <div class="links">
         <a href="/history">History</a>
-        <a
-          href="https://portfolio-frv3.vercel.app/"
-          target="_blank"
-          rel="noopener noreferrer"
+        <a href="https://portfolio-frv3.vercel.app/" target="_blank"
           >Portfolio</a
         >
         <a
           href="https://www.linkedin.com/in/sagnik-dam-b33bb3322"
           target="_blank"
-          rel="noopener noreferrer"
           >LinkedIn</a
         >
-        <a
-          href="https://www.instagram.com/s4g.n1k_/"
-          target="_blank"
-          rel="noopener noreferrer"
+        <a href="https://www.instagram.com/s4g.n1k_/" target="_blank"
           >Instagram</a
         >
-        <a
-          href="https://x.com/29Sagnik"
-          target="_blank"
-          rel="noopener noreferrer"
-          >X</a
-        >
+        <a href="https://x.com/29Sagnik" target="_blank">X</a>
 
-        <button
-          type="button"
-          class="theme-btn"
-          onclick="toggleTheme()"
-          aria-label="Toggle Theme"
-        >
+        <button type="button" class="theme-btn" onclick="toggleTheme()">
           🌗
         </button>
       </div>
     </nav>
 
-    <!-- ================= HERO SECTION ================= -->
+    <!-- ================= HERO ================= -->
     <main class="container">
       <div class="card">
         <h1>Analyze Your Resume with AI</h1>
@@ -82,16 +50,6 @@
           seconds.
         </p>
 
-        <!-- Flash Messages -->
-        {% with messages = get_flashed_messages() %} {% if messages %}
-        <div class="flash-messages">
-          {% for message in messages %}
-          <p class="flash">{{ message }}</p>
-          {% endfor %}
-        </div>
-        {% endif %} {% endwith %}
-
-        <!-- Upload Form -->
         <form
           action="/analyze"
           method="POST"
@@ -101,9 +59,9 @@
           <div class="drop-zone" id="dropZone">
             <p>
               📄 Drag & Drop Resume Here <br />
-              <span class="small-text">
-                or click to browse (PDF recommended, max 5MB)
-              </span>
+              <span class="small-text"
+                >or click to browse (PDF recommended)</span
+              >
             </p>
 
             <input
@@ -119,27 +77,23 @@
           <button type="submit">🚀 Analyze Resume</button>
         </form>
 
-        <!-- Feature Highlights -->
         <div class="features">
-          <div class="feature">⚡ Instant AI Scoring</div>
-          <div class="feature">🎯 Skill Matching</div>
-          <div class="feature">📊 Detailed Breakdown</div>
+          <div>⚡ Instant AI Scoring</div>
+          <div>🎯 Skill Matching</div>
+          <div>📊 Detailed Breakdown</div>
         </div>
       </div>
     </main>
 
-    <!-- ================= LOADING OVERLAY ================= -->
+    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loader">
       <div class="spinner"></div>
-      <p class="loading-text">Analyzing Resume with AI...</p>
+      <p>Analyzing Resume...</p>
     </div>
 
-    <!-- ================= FOOTER ================= -->
-    <footer>
-      <p>© 2026 Sagnik Dam | Built with Flask & AI</p>
-    </footer>
+    <footer>© 2026 Sagnik Dam | Built with Flask & AI</footer>
 
-    <!-- ================= DRAG & DROP SCRIPT ================= -->
+    <!-- Drag & Drop -->
     <script>
       const dropZone = document.getElementById("dropZone");
       const fileInput = document.getElementById("resumeInput");
@@ -158,11 +112,7 @@
       dropZone.addEventListener("drop", (e) => {
         e.preventDefault();
         dropZone.classList.remove("dragover");
-
-        const files = e.dataTransfer.files;
-        if (files.length > 0) {
-          fileInput.files = files;
-        }
+        fileInput.files = e.dataTransfer.files;
       });
 
       function showLoader() {
