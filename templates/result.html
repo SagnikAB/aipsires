@@ -37,41 +37,33 @@
     </nav>
 
     <!-- ================= MAIN ================= -->
-    <div class="container">
-      <div class="card">
-        <h1>Overall Resume Score</h1>
+    <div class="card result-card">
+      <h1 class="result-title">Overall Resume Score</h1>
 
-        <!-- Score Circle -->
-        <div class="score-circle">{{ score }}%</div>
-
-        <!-- Score Interpretation -->
-        <div class="score-text">
-          {% if score >= 80 %}
-          <p class="excellent">🔥 Excellent Resume</p>
-          {% elif score >= 60 %}
-          <p class="good">👍 Good but Can Improve</p>
-          {% else %}
-          <p class="improve">⚠ Needs Improvement</p>
-          {% endif %}
+      <!-- SCORE BLOCK -->
+      <div class="score-wrapper">
+        <div class="score-number">{{ score }}%</div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: {{ score }}%;"></div>
         </div>
-
-        <!-- Keywords Section -->
-        <div class="keywords-section">
-          <h3>Detected Skills & Keywords</h3>
-
-          {% if keywords %}
-          <div class="skills-grid">
-            {% for k in keywords %}
-            <span class="skill-badge">{{ k }}</span>
-            {% endfor %}
-          </div>
-          {% else %}
-          <p class="empty-state">No relevant keywords detected.</p>
-          {% endif %}
-        </div>
-
-        <a href="/" class="back-btn">← Analyze Another Resume</a>
       </div>
+
+      <p class="score-message">
+        {% if score >= 80 %} 🔥 Excellent Resume {% elif score >= 60 %} 👍 Good
+        but Can Improve {% else %} ⚠ Needs Improvement {% endif %}
+      </p>
+
+      <!-- KEYWORDS -->
+      <div class="keywords-section">
+        <h3>Detected Skills & Keywords</h3>
+        <div class="keywords-grid">
+          {% for k in keywords %}
+          <span class="keyword-badge">{{ k }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <a href="/" class="primary-btn">Analyze Another Resume</a>
     </div>
 
     <footer>

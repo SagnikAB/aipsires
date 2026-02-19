@@ -224,3 +224,82 @@ footer {
     gap: 10px;
   }
 }
+.result-card {
+  padding: 70px;
+}
+
+.result-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.score-wrapper {
+  margin-bottom: 20px;
+}
+
+.score-number {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  border-radius: 20px;
+  transition: width 0.6s ease;
+}
+
+.score-message {
+  margin-top: 15px;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.keywords-section {
+  margin-top: 40px;
+}
+
+.keywords-section h3 {
+  margin-bottom: 15px;
+}
+
+.keywords-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.keyword-badge {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--primary);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.primary-btn {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+}
