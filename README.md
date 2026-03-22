@@ -30,11 +30,13 @@ An AI-driven web application that evaluates resumes and analyzes candidate suita
 
 ### 🏠 Dashboard
 
-(Add screenshot here)
+<img width="2559" height="1272" alt="image" src="https://github.com/user-attachments/assets/f66778ca-45eb-455d-b603-d297eb985cc7" />
+
 
 ### 📊 Analysis Result
 
-(Add screenshot here)
+<img width="714" height="501" alt="image" src="https://github.com/user-attachments/assets/6add950a-f612-4624-bebf-c772a2d01fff" />
+
 
 ---
 
