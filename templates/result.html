@@ -77,7 +77,7 @@
     <!-- ================= SCRIPT ================= -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const score = {{ score | tojson }};
+        const score = Number({{ score | tojson }});
         const progress = document.getElementById("progressFill");
 
         setTimeout(() => {

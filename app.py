@@ -17,16 +17,13 @@ app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
 
 UPLOAD_FOLDER = "uploads"
 ALLOWED_EXTENSIONS = {"pdf", "doc", "docx"}
-MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 5MB limit
+MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 5MB
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = MAX_CONTENT_LENGTH
 
-
-# Ensure upload folder exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Initialize database
 init_db()
 
 
@@ -37,10 +34,20 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+def get_rank(score):
+    if score >= 90:
+        return "🏆 Elite"
+    elif score >= 75:
+        return "🥇 Gold"
+    elif score >= 60:
+        return "🥈 Silver"
+    else:
+        return "🥉 Bronze"
+
+
 # ===============================
 # ROUTES
 # ===============================
-
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -59,72 +66,73 @@ def analyze():
         return redirect(url_for("home"))
 
     if not allowed_file(file.filename):
-        flash("Invalid file type. Only PDF, DOC, DOCX allowed.")
+        flash("Invalid file type.")
         return redirect(url_for("home"))
 
     try:
-        # Secure + Unique filename
         original_name = secure_filename(file.filename)
         unique_name = f"{uuid.uuid4().hex}_{original_name}"
         filepath = os.path.join(app.config["UPLOAD_FOLDER"], unique_name)
         file.save(filepath)
 
-        # Extract text
         text = extract_text(filepath)
 
         if not text.strip():
-            flash("Could not extract text from resume.")
+            flash("Could not extract text.")
             return redirect(url_for("home"))
 
-        # Score resume
         score, keywords = score_resume(text)
 
-        # Save to database
         save_resume(original_name, score, keywords)
+
+        rank = get_rank(score)
 
         return render_template(
             "result.html",
             score=score,
-            keywords=keywords
+            keywords=keywords,
+            rank=rank
         )
 
     except Exception as e:
-        print("Error:", e)
-        flash("Something went wrong while analyzing the resume.")
+        print(e)
+        flash("Error analyzing resume.")
         return redirect(url_for("home"))
 
 
 @app.route("/history")
 def history():
-    try:
-        data = get_all_resumes()
-        return render_template("history.html", data=data)
-    except Exception as e:
-        print("Database error:", e)
-        flash("Unable to fetch history.")
-        return redirect(url_for("home"))
+    data = get_all_resumes()
+
+    enhanced = []
+    for item in data:
+        filename, score, keywords = item
+        enhanced.append({
+            "filename": filename,
+            "score": score,
+            "keywords": keywords,
+            "rank": get_rank(score)
+        })
+
+    return render_template("history.html", data=enhanced)
 
 
 # ===============================
 # ERROR HANDLERS
 # ===============================
-
 @app.errorhandler(413)
 def file_too_large(e):
-    flash("File too large. Maximum size is 5MB.")
+    flash("File too large.")
     return redirect(url_for("home"))
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template("404.html"), 404
+    return "<h1>404 Page Not Found</h1>", 404
 
 
 # ===============================
-# RUN SERVER
+# RUN
 # ===============================
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    debug_mode = os.environ.get("FLASK_ENV") == "development"
-
-    app.run(host="0.0.0.0", port=port, debug=debug_mode)
+    app.run(debug=True)
