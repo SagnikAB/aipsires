@@ -1,125 +1,65 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Resume Analyzer | Smart Hiring Assistant</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Resume Analyzer</title>
 
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-    <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
-  </head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='theme.js') }}" defer></script>
+</head>
 
-  <body>
-    <!-- ================= NAVBAR ================= -->
-    <nav>
-      <div class="logo">
-        <h2>AI Resume Analyzer</h2>
-        <span class="badge">AI Powered</span>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav>
+  <div class="logo">
+    <h2>AI Resume Analyzer</h2>
+    <span class="badge">AI Powered</span>
+  </div>
+
+  <div class="links">
+    <a href="/history">History</a>
+    <button class="theme-btn" onclick="toggleTheme()">🌗</button>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+
+  <h1>Analyze Your Resume with AI 🚀</h1>
+  <p>
+    Get instant scoring, keyword detection, and recruiter insights in seconds.
+  </p>
+
+  <!-- ================= UPLOAD CARD ================= -->
+  <form action="/analyze" method="POST" enctype="multipart/form-data" class="upload-card">
+
+    <label for="fileInput" class="upload-box">
+      <input type="file" name="resume" id="fileInput" hidden required>
+
+      <div class="upload-content">
+        <h3>📂 Drag & Drop Resume</h3>
+        <p>or click to browse (PDF recommended)</p>
       </div>
+    </label>
 
-      <div class="links">
-        <a href="/history">History</a>
-        <a href="https://portfolio-frv3.vercel.app/" target="_blank"
-          >Portfolio</a
-        >
-        <a
-          href="https://www.linkedin.com/in/sagnik-dam-b33bb3322"
-          target="_blank"
-          >LinkedIn</a
-        >
-        <a href="https://www.instagram.com/s4g.n1k_/" target="_blank"
-          >Instagram</a
-        >
-        <a href="https://x.com/29Sagnik" target="_blank">X</a>
+    <button type="submit" class="primary-btn">Analyze Resume</button>
 
-        <button
-          type="button"
-          class="theme-btn"
-          onclick="toggleTheme()"
-        ></button>
-      </div>
-    </nav>
+  </form>
 
-    <!-- ================= HERO ================= -->
-    <main class="container">
-      <div class="card">
-        <h1>Analyze Your Resume with AI</h1>
-        <p class="subtitle">
-          Get instant scoring, keyword detection, and recruiter insights in
-          seconds.
-        </p>
+  <!-- FEATURES -->
+  <div class="features">
+    <span>⚡ Instant AI Scoring</span>
+    <span>🎯 Skill Matching</span>
+    <span>📊 Detailed Breakdown</span>
+  </div>
 
-        <form
-          action="/analyze"
-          method="POST"
-          enctype="multipart/form-data"
-          onsubmit="showLoader()"
-        >
-          <div class="drop-zone" id="dropZone">
-            <p>
-              📄 Drag & Drop Resume Here <br />
-              <span class="small-text"
-                >or click to browse (PDF recommended)</span
-              >
-            </p>
+</section>
 
-            <input
-              type="file"
-              id="resumeInput"
-              name="resume"
-              accept=".pdf,.doc,.docx"
-              hidden
-              required
-            />
-          </div>
+<footer>
+  © 2026 Sagnik Dam | Built with Flask & AI
+</footer>
 
-          <button type="submit">🚀 Analyze Resume</button>
-        </form>
-
-        <div class="features">
-          <div>⚡ Instant AI Scoring</div>
-          <div>🎯 Skill Matching</div>
-          <div>📊 Detailed Breakdown</div>
-        </div>
-      </div>
-    </main>
-
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loader">
-      <div class="spinner"></div>
-      <p>Analyzing Resume...</p>
-    </div>
-
-    <footer>© 2026 Sagnik Dam | Built with Flask & AI</footer>
-
-    <!-- Drag & Drop -->
-    <script>
-      const dropZone = document.getElementById("dropZone");
-      const fileInput = document.getElementById("resumeInput");
-
-      dropZone.addEventListener("click", () => fileInput.click());
-
-      dropZone.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        dropZone.classList.add("dragover");
-      });
-
-      dropZone.addEventListener("dragleave", () => {
-        dropZone.classList.remove("dragover");
-      });
-
-      dropZone.addEventListener("drop", (e) => {
-        e.preventDefault();
-        dropZone.classList.remove("dragover");
-        fileInput.files = e.dataTransfer.files;
-      });
-
-      function showLoader() {
-        document.getElementById("loader").style.display = "flex";
-      }
-    </script>
-  </body>
+</body>
 </html>
