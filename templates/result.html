@@ -23,11 +23,7 @@
       <div class="links">
         <a href="/">Home</a>
         <a href="/history">History</a>
-        <button
-          type="button"
-          class="theme-btn"
-          onclick="toggleTheme()"
-        ></button>
+        <button class="theme-btn" onclick="toggleTheme()"></button>
       </div>
     </nav>
 
@@ -36,19 +32,25 @@
       <div class="card result-card">
         <h1 class="result-title">Overall Resume Score</h1>
 
+        <!-- SCORE -->
         <div class="score-wrapper">
-          <div class="score-number" id="scoreNumber">{{ score }}%</div>
+          <div class="score-number">{{ score }}%</div>
 
           <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
           </div>
         </div>
 
+        <!-- RANK BADGE -->
+        <div class="rank-badge" id="rankBadge">{{ rank }}</div>
+
+        <!-- MESSAGE -->
         <p class="score-message">
           {% if score >= 80 %} 🔥 Excellent Resume {% elif score >= 60 %} 👍
           Good but Can Improve {% else %} ⚠ Needs Improvement {% endif %}
         </p>
 
+        <!-- KEYWORDS -->
         <div class="keywords-section">
           <h3>Detected Skills & Keywords</h3>
 
@@ -65,16 +67,17 @@
           {% endif %}
         </div>
 
+        <!-- ACTION BUTTON -->
         <a href="/" class="primary-btn">Analyze Another Resume</a>
       </div>
     </main>
 
     <footer>© 2026 Sagnik Dam | AI Resume Analyzer</footer>
 
-    <!-- ================= SCORE ANIMATION ================= -->
+    <!-- ================= SCRIPT ================= -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const score = {{ score|int }};
+        const score = {{ score | tojson }};
         const progress = document.getElementById("progressFill");
 
         setTimeout(() => {

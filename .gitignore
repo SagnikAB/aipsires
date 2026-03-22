@@ -1,8 +1,7 @@
 __pycache__/
 *.pyc
-.env
 uploads/
-instance/
+*.pdf
+*.docx
 *.db
-venv/
-.env/
+.env

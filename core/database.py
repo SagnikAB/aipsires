@@ -1,43 +1,40 @@
 import sqlite3
-from datetime import datetime
 
-DB_NAME = "resumes.db"
+def connect_db():
+    return sqlite3.connect("resume.db")
 
 def init_db():
-    conn = sqlite3.connect(DB_NAME)
-    cursor = conn.cursor()
+    conn = connect_db()
+    c = conn.cursor()
 
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS resumes (
+    c.execute("""
+    CREATE TABLE IF NOT EXISTS history (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         filename TEXT,
-        score INTEGER,
-        skills TEXT,
-        uploaded_at TEXT
+        score INTEGER
     )
     """)
 
     conn.commit()
     conn.close()
 
-def save_resume(filename, score, skills):
-    conn = sqlite3.connect(DB_NAME)
-    cursor = conn.cursor()
 
-    cursor.execute("""
-    INSERT INTO resumes (filename, score, skills, uploaded_at)
-    VALUES (?, ?, ?, ?)
-    """, (filename, score, ", ".join(skills), datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+def save_score(filename, score):
+    conn = connect_db()
+    c = conn.cursor()
+
+    c.execute("INSERT INTO history (filename, score) VALUES (?, ?)", (filename, score))
 
     conn.commit()
     conn.close()
 
-def get_all_resumes():
-    conn = sqlite3.connect(DB_NAME)
-    cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM resumes ORDER BY id DESC")
-    data = cursor.fetchall()
+def get_history():
+    conn = connect_db()
+    c = conn.cursor()
+
+    c.execute("SELECT filename, score FROM history ORDER BY id DESC")
+    data = c.fetchall()
 
     conn.close()
     return data

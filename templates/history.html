@@ -22,29 +22,32 @@
 
       <div class="links">
         <a href="/">Home</a>
-        <button type="button" class="theme-btn" onclick="toggleTheme()">
-          🌗
-        </button>
+        <button class="theme-btn" onclick="toggleTheme()">🌗</button>
       </div>
     </nav>
 
     <!-- ================= MAIN ================= -->
     <div class="container">
       <div class="card">
-        <h1>Previous Resume Analyses</h1>
-        <p class="subtitle">Track scores and resume performance over time</p>
+        <h1>📊 Previous Resume Analyses</h1>
+        <p class="subtitle">Track scores and performance over time</p>
 
         {% if data %}
         <div class="history-list">
-          {% for row in data %}
+          {% for item in data %}
           <div class="history-item">
             <div class="file-info">
-              <span class="file-name">📄 {{ row[1] }}</span>
-              <span class="score-badge">{{ row[2] }}%</span>
+              <span class="file-name">📄 {{ item.filename }}</span>
+
+              <div class="meta">
+                <span class="score-badge">{{ item.score }}%</span>
+                <span class="rank-badge">{{ item.rank }}</span>
+              </div>
             </div>
           </div>
           {% endfor %}
         </div>
+
         {% else %}
         <div class="empty-state">
           <p>No resumes analyzed yet.</p>
